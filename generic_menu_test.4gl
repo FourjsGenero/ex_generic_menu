@@ -13,9 +13,9 @@ DEFINE test_menu generic_menu.generic_menu_type
     OPEN WINDOW w WITH FORM "generic_menu_test"
    
     -- Initial values
-    LET test_menu.style = "dialog"
-    LET test_menu.comment="Select an item"
+    LET test_menu.style = "dialog"    
     LET test_menu.image = "question"
+    LET test_menu.comment="Select an item"
 
     LET test_menu.items[1].name = "print"
     LET test_menu.items[1].text = "Print"
@@ -35,8 +35,8 @@ DEFINE test_menu generic_menu.generic_menu_type
     -- Input the criteria for the menu and then display it
     DIALOG ATTRIBUTES(UNBUFFERED)
         INPUT BY NAME test_menu.style,
-                      test_menu.comment,
-                      test_menu.image ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
+                      test_menu.image,
+                      test_menu.comment ATTRIBUTES(WITHOUT DEFAULTS=TRUE)
         END INPUT
         INPUT ARRAY test_menu.items  FROM scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE, MAXCOUNT=20)
         END INPUT
@@ -69,13 +69,14 @@ DEFINE i INTEGER
     CALL sb.append("\n")
     IF test_menu.style IS NOT NULL THEN
         CALL sb.append(SFMT("\nLET menu.style='%1'", test_menu.style))
-    END IF    
-    IF test_menu.comment IS NOT NULL THEN
-        CALL sb.append(SFMT("\nLET menu.comment='%1'", test_menu.comment))
-    END IF
+    END IF   
     IF test_menu.image IS NOT NULL THEN
         CALL sb.append(SFMT("\nLET menu.image='%1'", test_menu.image))
     END IF
+    IF test_menu.comment IS NOT NULL THEN
+        CALL sb.append(SFMT("\nLET menu.comment='%1'", test_menu.comment))
+    END IF
+    
     CALL sb.append("\n")
     FOR i = 1 TO test_menu.items.getLength()
         IF test_menu.items[i].name IS NOT NULL THEN
@@ -84,12 +85,13 @@ DEFINE i INTEGER
         IF test_menu.items[i].text IS NOT NULL THEN
             CALL sb.append(SFMT("\nLET menu.items[%2].text='%1'", test_menu.items[i].text,i))
         END IF 
-        IF test_menu.items[i].item_comment IS NOT NULL THEN
-            CALL sb.append(SFMT("\nLET menu.items[%2].item_comment='%1'", test_menu.items[i].item_comment,i))
-        END IF 
         IF test_menu.items[i].item_image IS NOT NULL THEN
             CALL sb.append(SFMT("\nLET menu.items[%2].item_image='%1'", test_menu.items[i].item_image,i))
         END IF 
+        IF test_menu.items[i].item_comment IS NOT NULL THEN
+            CALL sb.append(SFMT("\nLET menu.items[%2].item_comment='%1'", test_menu.items[i].item_comment,i))
+        END IF 
+        
        
         CALL sb.append("\n")
     END FOR

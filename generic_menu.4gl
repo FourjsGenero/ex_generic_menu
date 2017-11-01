@@ -3,7 +3,7 @@ PUBLIC TYPE generic_menu_type RECORD
     image STRING,
     comment STRING,
     items DYNAMIC ARRAY OF RECORD
-        name, text, item_comment, item_image STRING
+        name, text, item_image, item_comment  STRING
     END RECORD
 END RECORD
 
@@ -23,6 +23,7 @@ DEFINE selection INTEGER
                CALL DIALOG.setActionText(SFMT("action%1", i USING "&&"),design.items[i].text)
                CALL DIALOG.setActionImage(SFMT("action%1", i USING "&&"),design.items[i].item_image)
                CALL DIALOG.setActionComment(SFMT("action%1", i USING "&&"),design.items[i].item_comment)
+               
             ELSE
                -- Hide those actions that haven't been defined
                CALL DIALOG.setActionHidden(SFMT("action%1", i USING "&&"),TRUE)
