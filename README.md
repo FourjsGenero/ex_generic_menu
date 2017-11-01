@@ -18,3 +18,11 @@ Note the entry clicked on the menu
 Click on View Source to see source required
 
 <img alt="Source Example" src="https://user-images.githubusercontent.com/13615993/32272409-c8926f84-bf62-11e7-96b2-50b216055737.png" width="50%" />    
+
+Typically I would expect this source to be based on reading database configuration or from some .json or .xml type configuration file that is editable onsite
+
+## TODO
+
+Illustrate reading from configuration file example
+Add Quick Menu example
+Add additional viewing style based on INPUT and full screen of images
