@@ -24,5 +24,7 @@ Typically I would expect this source to be based on reading database configurati
 ## TODO
 
 Illustrate reading from configuration file example
+
 Add Quick Menu example
+
 Add additional viewing style based on INPUT and full screen of images
