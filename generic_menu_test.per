@@ -1,0 +1,38 @@
+LAYOUT (TEXT="Generic Menu Test")
+GRID
+{
+Style   [d01                                             ]
+Comment [d02                                             ]
+Image   [d03                                             ]
+<T                                                       >
+ [c01       |c02         |c03       |c04                ]
+ [c01       |c02         |c03       |c04                ]
+ [c01       |c02         |c03       |c04                ]
+ [c01       |c02         |c03       |c04                ]
+ [c01       |c02         |c03       |c04                ]
+<                                                        >
+[bg01                                                    ]
+
+ In this example, you can build up a menu generically i.e. maybe from a 
+ database or set of configuration files. Type into the array some additional
+ menu entries and click the button. The only restriction is the maximum
+ number of entries, in this instance 20. I haven't got them here but you
+ could add other methods to change the accelerator attribtue.
+}
+END
+END
+
+ATTRIBUTES
+
+COMBOBOX d01 = formonly.STYLE, ITEMS=(("dialog","Dialog"),("popup","Popup"));
+EDIT d02 = formonly.COMMENT;
+EDIT d03 = formonly.IMAGE;
+
+c01 = formonly.name, SCROLL, COMMENT = "Enter the action name", TITLE="Name";
+c02 = formonly.text, SCROLL, COMMENT="Enter the menu text", TITLE="Text";
+c03 = formonly.item_image, SCROLL, COMMENT="Enter the menu image", TITLE="Image";
+c04 = formonly.item_comment, SCROLL, COMMENT="Enter the menu comment", TITLE="Comment";
+BUTTON bg01: menu, TEXT="Show Menu", COMMENT="Show menu";
+
+INSTRUCTIONS
+SCREEN RECORD scr(name,text,item_image,item_comment);
