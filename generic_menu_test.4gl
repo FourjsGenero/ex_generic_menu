@@ -20,17 +20,26 @@ DEFINE test_menu generic_menu.generic_menu_type
     LET test_menu.items[1].name = "print"
     LET test_menu.items[1].text = "Print"
     LET test_menu.items[1].item_image = "fa-print"
+    LEt test_menu.items[1].item_accelerator = "Control-P"
     LET test_menu.items[1].item_comment = "Print file to printer"
    
     LET test_menu.items[2].name = "email"
     LET test_menu.items[2].text = "Email"
     LET test_menu.items[2].item_image = "fa-envelope-o"
+    LEt test_menu.items[2].item_accelerator = "Control-E"
     LET test_menu.items[2].item_comment = "Email file"
    
     LET test_menu.items[3].name = "save"
     LET test_menu.items[3].text = "Save"
     LET test_menu.items[3].item_image = "fa-save"
+    LEt test_menu.items[3].item_accelerator = "Control-S"
     LET test_menu.items[3].item_comment = "Save file to disk"
+
+    LET test_menu.items[4].name = "refresh"
+    LET test_menu.items[4].text = "Refresh"
+    LET test_menu.items[4].item_image = "fa-sync"
+    LEt test_menu.items[4].item_accelerator = "F5"
+    LET test_menu.items[4].item_comment = "Refresh"
 
     -- Input the criteria for the menu and then display it
     DIALOG ATTRIBUTES(UNBUFFERED)
@@ -87,6 +96,9 @@ DEFINE i INTEGER
         END IF 
         IF test_menu.items[i].item_image IS NOT NULL THEN
             CALL sb.append(SFMT("\nLET menu.items[%2].item_image='%1'", test_menu.items[i].item_image,i))
+        END IF 
+        IF test_menu.items[i].item_accelerator IS NOT NULL THEN
+            CALL sb.append(SFMT("\nLET menu.items[%2].item_accelerator='%1'", test_menu.items[i].item_accelerator,i))
         END IF 
         IF test_menu.items[i].item_comment IS NOT NULL THEN
             CALL sb.append(SFMT("\nLET menu.items[%2].item_comment='%1'", test_menu.items[i].item_comment,i))

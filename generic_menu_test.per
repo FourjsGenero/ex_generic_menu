@@ -1,23 +1,22 @@
 LAYOUT (TEXT="Generic Menu Test")
 GRID
 {
-Style   [d01                                             ]
-Image   [d02                                             ]
-Comment [d03                                             ]
-<T                                                       >
- [c01       |c02         |c03       |c04                ]
- [c01       |c02         |c03       |c04                ]
- [c01       |c02         |c03       |c04                ]
- [c01       |c02         |c03       |c04                ]
- [c01       |c02         |c03       |c04                ]
-<                                                        >
-[bg01                                                    ]
+Style   [d01                                                         ]
+Image   [d02                                                         ]
+Comment [d03                                                         ]
+<T                                                                    >
+ [c01       |c02         |c03       |c04         |c05                ]
+ [c01       |c02         |c03       |c04         |c05                ]
+ [c01       |c02         |c03       |c04         |c05                ]
+ [c01       |c02         |c03       |c04         |c05                ]
+ [c01       |c02         |c03       |c04         |c05                ]
+<                                                                     >
+[bg01                                                                ]
 
  In this example, you can build up a menu generically i.e. maybe from a 
  database or set of configuration files. Type into the array some additional
  menu entries and click the button. The only restriction is the maximum
- number of entries, in this instance 20. I haven't got them here but you
- could add other methods to change the accelerator attribtue.
+ number of entries, in this instance 20. 
 }
 END
 END
@@ -31,8 +30,9 @@ EDIT d03 = formonly.comment, SCROLL, COMMENT="Enter the menu comment";
 EDIT c01 = formonly.name, SCROLL, COMMENT = "Enter the menu item action name", TITLE="Name";
 EDIT c02 = formonly.text, SCROLL, COMMENT="Enter the menu item text", TITLE="Text";
 EDIT c03 = formonly.item_image, SCROLL, COMMENT="Enter the menu item image", TITLE="Image";
-EDIT c04 = formonly.item_comment, SCROLL, COMMENT="Enter the menu item comment", TITLE="Comment";
+EDIT c04 = formonly.item_accelerator, SCROLL, COMMENT="Enter the accelerator", TITLE="Accelerator";
+EDIT c05 = formonly.item_comment, SCROLL, COMMENT="Enter the menu item comment", TITLE="Comment";
 BUTTON bg01: menu, TEXT="Show Menu", COMMENT="Show menu";
 
 INSTRUCTIONS
-SCREEN RECORD scr(name,text,item_image,item_comment);
+SCREEN RECORD scr(name,text,item_image,item_accelerator,item_comment);
