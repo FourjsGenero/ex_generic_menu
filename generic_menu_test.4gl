@@ -50,7 +50,7 @@ DEFINE test_menu generic_menu.generic_menu_type
         INPUT ARRAY test_menu.items  FROM scr.* ATTRIBUTES(WITHOUT DEFAULTS=TRUE, MAXCOUNT=20)
         END INPUT
         ON ACTION menu
-            CALL generic_menu.execute(test_menu.*) RETURNING selection
+            CALL test_menu.execute() RETURNING selection
             IF selection > 0 THEN
                 CALL FGL_WINMESSAGE("Info", SFMT("Value selected is %1", test_menu.items[selection].text),"info")
             ELSE
@@ -107,7 +107,7 @@ DEFINE i INTEGER
        
         CALL sb.append("\n")
     END FOR
-    CALL sb.append("\nLET selection = generic_menu.execute(menu.*)")
+    CALL sb.append("\nLET selection = menu.execute()")
 
     CALL FGL_WINMESSAGE("Source", sb.toString(),"info")
 

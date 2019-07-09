@@ -9,17 +9,21 @@ END RECORD
 
 
 
-FUNCTION execute(design)
-DEFINE design generic_menu_type
+FUNCTION (this generic_menu_type)init() RETURNS ()
+    INITIALIZE this.* TO NULL
+END FUNCTION
 
+
+
+FUNCTION (this generic_menu_type)execute() RETURNS INTEGER
 DEFINE i INTEGER
 DEFINE selection INTEGER
 DEFINE initial_length INTEGER
 
     # have to save initial length and use as the MENU will corrupt the length to 20
-    LET initial_length = design.items.getLength()
+    LET initial_length = this.items.getLength()
 
-    MENU "Generic Menu" ATTRIBUTES(STYLE=design.style, IMAGE=design.image, COMMENT=design.comment)
+    MENU "Generic Menu" ATTRIBUTES(STYLE=this.style, IMAGE=this.image, COMMENT=this.comment)
         BEFORE MENU
             FOR i = 1 TO 20
                 IF i <= initial_length THEN
@@ -33,10 +37,10 @@ DEFINE initial_length INTEGER
          END FOR
                        
        -- Determine what action was selected
-&define menuline(p1) ON ACTION action ## p1 ATTRIBUTES(TEXT=design.items[p1].text, \
-                                                       COMMENT=design.items[p1].item_comment, \
-                                                       IMAGE=design.items[p1].item_image, \
-                                                       ACCELERATOR=design.items[p1].item_accelerator) \
+&define menuline(p1) ON ACTION action ## p1 ATTRIBUTES(TEXT=this.items[p1].text, \
+                                                       COMMENT=this.items[p1].item_comment, \
+                                                       IMAGE=this.items[p1].item_image, \
+                                                       ACCELERATOR=this.items[p1].item_accelerator) \
                        LET selection = p1 EXIT MENU
        menuline(01)
        menuline(02)
@@ -66,7 +70,7 @@ DEFINE initial_length INTEGER
 
     # As dynamic array passed by reference, have to remove menu entries unintentionally added when referenced in array
     FOR i = 20 TO (initial_length+1) STEP -1
-        CALL design.items.deleteElement(i)
+        CALL this.items.deleteElement(i)
     END FOR
 
    RETURN selection
