@@ -6,7 +6,7 @@ PUBLIC TYPE generic_menu_type RECORD
         name, text, item_image, item_accelerator, item_comment  STRING
     END RECORD
 END RECORD
-
+CONSTANT MAX_MENU_SIZE = 20
 
 
 FUNCTION (this generic_menu_type)init() RETURNS ()
@@ -25,7 +25,7 @@ DEFINE initial_length INTEGER
 
     MENU "Generic Menu" ATTRIBUTES(STYLE=this.style, IMAGE=this.image, COMMENT=this.comment)
         BEFORE MENU
-            FOR i = 1 TO 20
+            FOR i = 1 TO MAX_MENU_SIZE
                 IF i <= initial_length THEN
                     CALL DIALOG.setActionActive(SFMT("action%1", i USING "&&"),TRUE)
                     CALL DIALOG.setActionHidden(SFMT("action%1", i USING "&&"),FALSE)
@@ -69,7 +69,7 @@ DEFINE initial_length INTEGER
     END MENU 
 
     # As dynamic array passed by reference, have to remove menu entries unintentionally added when referenced in array
-    FOR i = 20 TO (initial_length+1) STEP -1
+    FOR i = MAX_MENU_SIZE TO (initial_length+1) STEP -1
         CALL this.items.deleteElement(i)
     END FOR
 
